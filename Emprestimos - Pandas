@@ -1,7 +1,7 @@
 import pandas
 
 #array contendo csv de emprestimos
-list_emprestimos = [pandas.read_csv('https://github.com/FranciscoFoz/7_Days_of_Code_Alura-Python-Pandas/blob/main/Dia_1-Importando_dados/Datasets/dados_emprestimos/emprestimos-20101.csv'),
+lista_emprestimos = [pandas.read_csv('https://github.com/FranciscoFoz/7_Days_of_Code_Alura-Python-Pandas/blob/main/Dia_1-Importando_dados/Datasets/dados_emprestimos/emprestimos-20101.csv'),
                     pandas.read_csv('https://github.com/FranciscoFoz/7_Days_of_Code_Alura-Python-Pandas/blob/main/Dia_1-Importando_dados/Datasets/dados_emprestimos/emprestimos-20102.csv'),
                     pandas.read_csv('https://github.com/FranciscoFoz/7_Days_of_Code_Alura-Python-Pandas/blob/main/Dia_1-Importando_dados/Datasets/dados_emprestimos/emprestimos-20111.csv'),
                     pandas.read_csv('https://github.com/FranciscoFoz/7_Days_of_Code_Alura-Python-Pandas/blob/main/Dia_1-Importando_dados/Datasets/dados_emprestimos/emprestimos-20112.csv'),
@@ -21,6 +21,11 @@ list_emprestimos = [pandas.read_csv('https://github.com/FranciscoFoz/7_Days_of_C
                     pandas.read_csv('https://github.com/FranciscoFoz/7_Days_of_Code_Alura-Python-Pandas/blob/main/Dia_1-Importando_dados/Datasets/dados_emprestimos/emprestimos-20182.csv'),
                     pandas.read_csv('https://github.com/FranciscoFoz/7_Days_of_Code_Alura-Python-Pandas/blob/main/Dia_1-Importando_dados/Datasets/dados_emprestimos/emprestimos-20191.csv'),
                     pandas.read_csv('https://github.com/FranciscoFoz/7_Days_of_Code_Alura-Python-Pandas/blob/main/Dia_1-Importando_dados/Datasets/dados_emprestimos/emprestimos-20192.csv'),
-                    pandas.read_csv('https://github.com/FranciscoFoz/7_Days_of_Code_Alura-Python-Pandas/blob/main/Dia_1-Importando_dados/Datasets/dados_emprestimos/emprestimos-20201.csv')]
+                    pandas.read_csv('https://github.com/FranciscoFoz/7_Days_of_Code_Alura-Python-Pandas/blob/main/Dia_1-Importando_dados/Datasets/dados_emprestimos/emprestimos-20201.csv')]:
 
-for emprestimo in list_emprestimos:
+#Concatenas todos CSV em apenas um único e apaga lista_emprestimos
+emprestimos = pandas.concat([pandas.read_csv(emprestimo) for emprestimo in lista_emprestimos], ignore_index=True)
+del lista_emprestimos
+
+#Exclui linhas que possuem o mesmo valor na coluna 'id_emprestimo' do novo CSV
+emprestimos = emprestimos.drop_duplicates(subset=['id_emprestimo'])
